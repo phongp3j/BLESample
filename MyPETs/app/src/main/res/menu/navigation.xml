@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mMyPets"
+        android:title="My Pets"
+        ></item>
+    <item
+        android:id="@+id/mAddPet"
+        android:title="Add New Pet"
+        ></item>
+    <item
+        android:id="@+id/mUserInfo"
+        android:title="Info"
+        ></item>
+</menu>
