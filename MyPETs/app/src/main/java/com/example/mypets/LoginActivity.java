@@ -14,7 +14,7 @@ import com.example.mypets.SQLite.SQLiteHelper;
 public class LoginActivity extends AppCompatActivity {
     private EditText edUsername, edPassword;
 
-    private Button loginBtn,registerBtn;
+    private Button loginBtn, registerBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,19 +33,17 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String username = edUsername.getText().toString();
                 String password = edPassword.getText().toString();
-                if(username.isEmpty()){
+                if (username.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập tài khoản", Toast.LENGTH_SHORT).show();
                 } else if (password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
-                }
-                else{
+                } else {
                     SQLiteHelper db = new SQLiteHelper(LoginActivity.this);
-                    if(db.login(username,password) == false){
+                    if (db.login(username, password) == false) {
                         Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không đúng!", Toast.LENGTH_SHORT).show();
-                    }
-                    else {
+                    } else {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.putExtra("username",username);
+                        intent.putExtra("username", username);
                         startActivity(intent);
                     }
                 }
@@ -53,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void initview(){
+    public void initview() {
         edUsername = findViewById(R.id.username);
         edPassword = findViewById(R.id.password);
         loginBtn = findViewById(R.id.login);

@@ -6,11 +6,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.mypets.Model.User;
 import com.example.mypets.SQLite.SQLiteHelper;
@@ -56,10 +52,9 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     SQLiteHelper db = new SQLiteHelper(RegisterActivity.this);
                     User user = new User(username, password, fullname, email, phone);
-                    if(db.register(user) == -1){
+                    if (db.register(user) == -1) {
                         Toast.makeText(RegisterActivity.this, "Tài khoản đã tồn tại trên hệ thống!", Toast.LENGTH_SHORT).show();
-                    }
-                    else{
+                    } else {
                         Toast.makeText(RegisterActivity.this, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
                         finish();
                     }
