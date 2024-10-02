@@ -17,10 +17,12 @@ import java.util.List;
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.HomeViewHolder> {
     private List<Pet> list;
     private ItemListener itemListener;
-    public RecycleViewAdapter(){
+
+    public RecycleViewAdapter() {
         list = new ArrayList<>();
     }
-    public  void  setList(List<Pet> list){
+
+    public void setList(List<Pet> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -29,13 +31,14 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         this.itemListener = itemListener;
     }
 
-    public Pet getItem(int position){
+    public Pet getItem(int position) {
         return list.get(position);
     }
+
     @NonNull
     @Override
     public HomeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item, parent, false);
         return new HomeViewHolder(view);
     }
 
@@ -43,11 +46,10 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Pet item = list.get(position);
         holder.ten.setText(item.getName());
-        holder.tuoi.setText(item.getAge()+"");
-        if(item.getAddressDevice() != null){
-            holder.sensor.setText(item.getAddressDevice());
-        }
-        else{
+        holder.tuoi.setText(item.getAge() + "");
+        if (item.getDeviceAddress() != null) {
+            holder.sensor.setText(item.getDeviceAddress());
+        } else {
             holder.sensor.setText("Chưa kết nối Sensor!");
         }
         holder.trangthai.setText("Offline");
@@ -58,8 +60,13 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
         return list.size();
     }
 
+    public interface ItemListener {
+        void onItemClick(View view, int position);
+    }
+
     public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView ten,tuoi,sensor,trangthai;
+        private TextView ten, tuoi, sensor, trangthai;
+
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
             ten = itemView.findViewById(R.id.tvTen);
@@ -71,13 +78,9 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
         @Override
         public void onClick(View v) {
-            if(itemListener!=null){
-                itemListener.onItemClick(v,getAdapterPosition());
+            if (itemListener != null) {
+                itemListener.onItemClick(v, getAdapterPosition());
             }
         }
-    }
-
-    public interface ItemListener{
-        void onItemClick(View view,int position);
     }
 }

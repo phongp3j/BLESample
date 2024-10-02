@@ -1,29 +1,23 @@
 package com.example.mypets.Model;
 
+import com.example.mypets.Utils.PasswordUtils;
+
 import java.io.Serializable;
 
 public class User implements Serializable {
-    int id;
-    String username,password,fullname,email,phone;
+    private int id;
+    private String username;
+    private String hashedPassword;    // mật khẩu đã được băm
+    private String createdAt;
 
     public User() {
     }
 
-    public User(int id,String username, String password, String fullname, String email,String phone) {
-        this.username = username;
-        this.fullname = fullname;
-        this.password = password;
+    public User(int id, String username, String rawPassword, String createdAt) {
         this.id = id;
-        this.email = email;
-        this.phone = phone;
-    }
-
-    public User(String username, String password, String fullname, String email,String phone) {
         this.username = username;
-        this.fullname = fullname;
-        this.password = password;
-        this.email = email;
-        this.phone = phone;
+        this.hashedPassword = PasswordUtils.hashPassword(rawPassword);
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -42,35 +36,19 @@ public class User implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getHashedPassword() {
+        return hashedPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setHashedPassword(String rawPassword) {
+        this.hashedPassword = PasswordUtils.hashPassword(rawPassword);
     }
 
-    public String getFullname() {
-        return fullname;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setFullname(String fullname) {
-        this.fullname = fullname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

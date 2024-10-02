@@ -1,0 +1,57 @@
+package com.example.mypets.SQLite;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import com.example.mypets.Model.Pet;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PetDao {
+
+    private final SQLiteHelper dbHelper;
+    private SQLiteDatabase db;
+
+    public PetDao(Context context) {
+        dbHelper = new SQLiteHelper(context);
+    }
+
+    public void close() {
+        dbHelper.close();
+
+        if (db != null)
+            db.close();
+    }
+
+
+    //Get all pet
+    public List<Pet> getAll(String userId) {
+        List<Pet> list = new ArrayList<>();
+        db = dbHelper.getReadableDatabase();
+
+        String selection = "user_id = ?";
+        String[] selectionArgs = {userId};
+        String order = "name DESC";
+
+        Cursor cursor = db.query("pets", null, selection, selectionArgs, null, null, order);
+
+        while (cursor != null && cursor.moveToNext()) {
+            list.add(new Pet(cursor.getInt(0),
+                    cursor.getInt(1),
+                    cursor.getString(2),
+                    cursor.getInt(3),
+                    cursor.getString(4),
+                    cursor.getFloat(5),
+                    cursor.getString(6),
+                    cursor.getString(7)
+            ));
+        }
+
+        if (cursor != null)
+            cursor.close();
+
+        return list;
+    }
+}

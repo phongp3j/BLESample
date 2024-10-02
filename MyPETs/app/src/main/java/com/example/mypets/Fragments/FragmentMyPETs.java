@@ -14,21 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mypets.Adapters.RecycleViewAdapter;
-import com.example.mypets.ConnectActivity;
 import com.example.mypets.Data.DataManager;
 import com.example.mypets.Model.Pet;
 import com.example.mypets.PetDetailActivity;
 import com.example.mypets.R;
-import com.example.mypets.SQLite.SQLiteHelper;
+import com.example.mypets.SQLite.PetDao;
 
 import java.util.List;
 
 public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemListener {
+    String receivedData;
     private RecycleViewAdapter adapter;
     private RecyclerView recyclerView;
     private SQLiteHelper db;
     private TextView tvdalam;
-    String receivedData;
+
+    private PetDao petDao;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -39,31 +41,38 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclView);
-        adapter = new RecycleViewAdapter();
-        db = new SQLiteHelper(getContext());
         tvdalam = view.findViewById(R.id.dathem);
-        receivedData= DataManager.getInstance().getData();
-        List<Pet> list = db.getAllPet(receivedData);
-        adapter.setList(list);
-        tvdalam.setText("Số Pet đã thêm: "+list.size());
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+
+        adapter = new RecycleViewAdapter();
+        petDao = new PetDao(getContext());
+
+        receivedData = DataManager.getInstance().getData();
+
+        LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
         adapter.setItemListener(this);
     }
+
     @Override
     public void onItemClick(View view, int position) {
         Pet item = adapter.getItem(position);
         Intent intent = new Intent(getActivity(), PetDetailActivity.class);
-        intent.putExtra("item",item);
+        intent.putExtra("item", item);
         startActivity(intent);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        List<Pet> list = db.getAllPet(receivedData);
+        List<Pet> list = petDao.getAll(receivedData);
         adapter.setList(list);
-        tvdalam.setText("Số Pet đã thêm: "+list.size());
+        tvdalam.setText("Số Pet đã thêm: " + list.size());
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        petDao.close();
     }
 }
