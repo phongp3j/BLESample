@@ -23,15 +23,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyPETs"
         tools:targetApi="31" >
-        <activity
-            android:name=".AddPetActivity"
-            android:exported="false"
-            android:label="@string/title_activity_add_pet"
-            android:theme="@style/Theme.MyPETs.NoActionBar" >
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
+       
         <activity
             android:name=".PetDetailActivity"
             android:exported="false" />
