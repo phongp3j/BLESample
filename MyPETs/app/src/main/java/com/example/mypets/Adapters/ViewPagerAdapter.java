@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 
 import com.example.mypets.Fragments.FragmentAddPet;
 import com.example.mypets.Fragments.FragmentMyPETs;
+import com.example.mypets.Fragments.FragmentScanBle;
 import com.example.mypets.Fragments.FragmentUserInfo;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
@@ -19,7 +20,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0: return new FragmentMyPETs();
-            case 1: return new FragmentAddPet();
+//            case 1: return new FragmentAddPet();
+            case 1: return new FragmentScanBle();
             case 2: return new FragmentUserInfo();
             default:return new FragmentMyPETs();
         }
