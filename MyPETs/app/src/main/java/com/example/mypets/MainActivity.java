@@ -24,10 +24,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         Intent intent = getIntent();
+
+        int userId = intent.getIntExtra("userId", -1);
         userLoginned = intent.getStringExtra("username");
-        DataManager.getInstance().setData(userLoginned);
+        DataManager.getInstance().setData(userId, userLoginned);
+
         initview();
+
         tvUsername.setText("Xin Chào " + userLoginned);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);

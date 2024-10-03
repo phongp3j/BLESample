@@ -23,10 +23,8 @@ import com.example.mypets.SQLite.PetDao;
 import java.util.List;
 
 public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemListener {
-    String receivedData;
     private RecycleViewAdapter adapter;
     private RecyclerView recyclerView;
-    private SQLiteHelper db;
     private TextView tvdalam;
 
     private PetDao petDao;
@@ -46,8 +44,6 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
         adapter = new RecycleViewAdapter();
         petDao = new PetDao(getContext());
 
-        receivedData = DataManager.getInstance().getData();
-
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(manager);
         recyclerView.setAdapter(adapter);
@@ -65,7 +61,7 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
     @Override
     public void onResume() {
         super.onResume();
-        List<Pet> list = petDao.getAll(receivedData);
+        List<Pet> list = petDao.getAll(DataManager.getInstance().getUserId());
         adapter.setList(list);
         tvdalam.setText("Số Pet đã thêm: " + list.size());
     }

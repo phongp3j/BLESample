@@ -38,8 +38,10 @@ public class LoginActivity extends AppCompatActivity {
             } else if (password.isEmpty()) {
                 Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu", Toast.LENGTH_SHORT).show();
             } else {
-                if (userDao.login(username, password)) {
+                int userId = userDao.login(username, password);
+                if (userId > 0) {
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    intent.putExtra("userId", userId);
                     intent.putExtra("username", username);
                     startActivity(intent);
                 } else {

@@ -48,14 +48,15 @@ public class UserDao {
     }
 
     //Login
-    public boolean login(String username, String rawPassword) {
+    public int login(String username, String rawPassword) {
         String whereClause = "username like ?";
         String[] whereArgs = {username};
 
         db = dbHelper.getReadableDatabase();
 
         Cursor cursor = db.query("users", null, whereClause, whereArgs, null, null, null);
-        boolean exist = false;
+
+        int userId = -1;    // not found
         while (cursor != null && cursor.moveToNext()) {
             String hashedPassword = PasswordUtils.hashPassword(rawPassword);
 
@@ -63,14 +64,14 @@ public class UserDao {
             String fHashedPassword = cursor.getString(2);
 
             if (username.equals(fUsername) && hashedPassword.equals(fHashedPassword)) {
-                exist = true;
+                userId = cursor.getInt(0);
             }
         }
 
         if (cursor != null)
             cursor.close();
 
-        return exist;
+        return userId;
     }
 
 }

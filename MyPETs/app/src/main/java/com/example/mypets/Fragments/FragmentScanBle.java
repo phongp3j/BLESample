@@ -21,6 +21,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mypets.Adapters.BleDeviceAdapter;
+import com.example.mypets.AddPetActivity;
 import com.example.mypets.R;
 
 import java.util.ArrayList;
@@ -67,6 +68,18 @@ public class FragmentScanBle extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
+            // Hiển thị thông báo yêu cầu người dùng bật Bluetooth
+            Log.d(TAG, "onViewCreated: yêu cầu bật Bluetooth");
+            Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+            startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH);
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_scan_ble, container, false);
@@ -85,23 +98,16 @@ public class FragmentScanBle extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter == null || !bluetoothAdapter.isEnabled()) {
-            // Hiển thị thông báo yêu cầu người dùng bật Bluetooth
-            Log.d(TAG, "onViewCreated: yêu cầu bật Bluetooth");
-            Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-            startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH);
-        }
-
-        bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+        if (bluetoothAdapter != null)
+            bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
         bleDeviceAdapter = new BleDeviceAdapter(scanResults, position -> {
             Log.d(TAG, "onViewCreated: click device position: " + position);
-            ScanResult device = scanResults.get(position);
+            ScanResult scanResult = scanResults.get(position);
 
-//            Intent intent = new Intent(this, DeviceControlActivity.class);
-//            intent.putExtra(DeviceControlActivity.KEY_DEVICE_ADDRESS, device.getDevice().getAddress());
-//            startActivity(intent);
+            Intent intent = new Intent(getContext(), AddPetActivity.class);
+            intent.putExtra(AddPetActivity.KEY_DEVICE_ADDRESS, scanResult.getDevice().getAddress());
+            startActivity(intent);
         });
         rvBleDevices.setAdapter(bleDeviceAdapter);
 
@@ -116,6 +122,9 @@ public class FragmentScanBle extends Fragment {
 
     @SuppressLint("MissingPermission")
     private void startBleScan() {
+        if (bluetoothLeScanner == null)
+            bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
         if (!scanning) {
             addressMap.clear();
             scanResults.clear();
@@ -140,6 +149,9 @@ public class FragmentScanBle extends Fragment {
 
     @SuppressLint("MissingPermission")
     private void stopBleScan() {
+        if (bluetoothLeScanner == null)
+            bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
+
         if (scanning) {
             btnScan.setText("SCAN");
             btnScan.setEnabled(true);

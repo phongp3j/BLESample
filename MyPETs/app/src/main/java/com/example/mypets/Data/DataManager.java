@@ -2,7 +2,10 @@ package com.example.mypets.Data;
 
 public class DataManager {
     private static DataManager instance;
-    private String userLoginned ;
+
+    // user login
+    private int userId;
+    private String username;
 
     private DataManager() {
     }
@@ -14,11 +17,16 @@ public class DataManager {
         return instance;
     }
 
-    public void setData(String newData) {
-        this.userLoginned = newData;
+    public void setData(int newId, String newUsername) {
+        this.userId = newId;
+        this.username = newUsername;
     }
 
-    public String getData() {
-        return userLoginned;
+    public int getUserId() {
+        return userId;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }

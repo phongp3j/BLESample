@@ -1,5 +1,6 @@
 package com.example.mypets.SQLite;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,14 +26,12 @@ public class PetDao {
             db.close();
     }
 
-
-    //Get all pet
-    public List<Pet> getAll(String userId) {
+    public List<Pet> getAll(int userId) {
         List<Pet> list = new ArrayList<>();
         db = dbHelper.getReadableDatabase();
 
         String selection = "user_id = ?";
-        String[] selectionArgs = {userId};
+        String[] selectionArgs = {String.valueOf(userId)};
         String order = "name DESC";
 
         Cursor cursor = db.query("pets", null, selection, selectionArgs, null, null, order);
@@ -53,5 +52,18 @@ public class PetDao {
             cursor.close();
 
         return list;
+    }
+
+    public long add(Pet pet) {
+        db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("user_id", pet.getUserId());
+        values.put("name", pet.getName());
+        values.put("age", pet.getAge());
+        values.put("breed", pet.getBreed());
+        values.put("weight", pet.getWeight());
+        values.put("deviceAddress", pet.getDeviceAddress());
+
+        return db.insert("pets", null, values);
     }
 }
