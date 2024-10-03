@@ -52,9 +52,9 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
 
     @Override
     public void onItemClick(View view, int position) {
-        Pet item = adapter.getItem(position);
+        Pet pet = adapter.getItem(position);
         Intent intent = new Intent(getActivity(), PetDetailActivity.class);
-        intent.putExtra("item", item);
+        intent.putExtra(PetDetailActivity.KEY_PET_DETAILS_DISPLAY, pet);
         startActivity(intent);
     }
 

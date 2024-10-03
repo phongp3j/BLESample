@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="Add Pet"
+            android:text="add or edit Pet here"
             android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

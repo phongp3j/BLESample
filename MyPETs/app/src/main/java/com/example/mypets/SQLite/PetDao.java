@@ -66,4 +66,21 @@ public class PetDao {
 
         return db.insert("pets", null, values);
     }
+
+    public int update(Pet pet) {
+        db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("user_id", pet.getUserId());
+        values.put("name", pet.getName());
+        values.put("age", pet.getAge());
+        values.put("breed", pet.getBreed());
+        values.put("weight", pet.getWeight());
+        values.put("deviceAddress", pet.getDeviceAddress());
+
+        String whereClause = "id = ?";
+        String[] whereArgs = {String.valueOf(pet.getId())};
+
+        return db.update("pets", values, whereClause, whereArgs);
+    }
 }
