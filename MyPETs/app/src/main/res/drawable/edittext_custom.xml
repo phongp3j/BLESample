@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- State when input text is focused -->
+    <item android:state_focused="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="16dp" /> <!-- Góc bo mềm mại -->
+            <stroke
+                android:width="2dp"
+                android:color="@color/input_border_focused" /> <!-- Viền khi input được focus -->
+        </shape>
+    </item>
+
+    <!-- Default state (not focused) -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@android:color/transparent" />
+            <corners android:radius="16dp" />
+            <stroke
+                android:width="2dp"
+                android:color="@color/input_border_default" /> <!-- Viền mặc định khi chưa focus -->
+        </shape>
+    </item>
+</selector>

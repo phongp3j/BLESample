@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,18 +9,28 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#7CBEF3"
-        android:orientation="vertical">
-
+        android:layout_height="60dp"
+        android:background="#E53935"
+        android:orientation="horizontal"
+        android:id="@+id/toolbar"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/dog"
+            app:tint="@color/white" />
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Thêm Thú Cưng Của Bạn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add New Pet"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-smallcaps"
             android:textColor="@color/white"
-            android:textSize="18dp"
-            android:textStyle="bold" />
+            android:layout_margin="10dp"
+            android:textSize="19dp"
+            />
 
     </LinearLayout>
 
@@ -32,71 +43,48 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Device address:"
-            android:layout_marginBottom="10dp"/>
+            android:text="Pet name:"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Enter the pet name"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edittext_custom"
+            android:enabled="false"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Breed:" />
 
         <EditText
             android:id="@+id/edt_device_address"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:hint="Enter breed"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:background="@drawable/edittext_custom"
             android:enabled="false"
             />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tên:" />
-
-        <EditText
-            android:id="@+id/tvTen"
-            android:hint="Nhập tên thú cưng"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Số tuổi:" />
-
-        <EditText
-            android:id="@+id/tvTuoi"
-            android:hint="Nhập tuổi thú cưng"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="number" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Thuộc loài:" />
+            android:text="Health information:" />
 
         <EditText
             android:id="@+id/tvType"
-            android:hint="Nhập loài"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:hint="Enter health information"
+            android:inputType="textMultiLine"
 
-        <TextView
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:background="@drawable/edittext_custom"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cân nặng:" />
-
-        <EditText
-            android:id="@+id/tvWeight"
-            android:hint="Nhập cân nặng"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ghi chú sức khoẻ:" />
-
-        <EditText
-            android:id="@+id/tvHealthInfo"
-            android:hint="Nhập thông tin sức khoẻ"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp" />
 
     </LinearLayout>
 
@@ -112,6 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
+            android:background="@drawable/button_custom"
             android:layout_weight="1"
             android:text="Back"
             android:textColor="@color/white" />
@@ -119,6 +108,7 @@
         <Button
             android:id="@+id/btAdd"
             android:layout_width="wrap_content"
+            android:background="@drawable/custom_register_button"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"

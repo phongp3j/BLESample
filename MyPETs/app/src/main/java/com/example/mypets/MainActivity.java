@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
         DataManager.getInstance().setData(userId, userLoginned);
 
         initview();
-
-        tvUsername.setText("Xin Chào " + userLoginned);
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

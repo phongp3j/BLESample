@@ -23,11 +23,9 @@ public class UserDao {
         if (db != null)
             db.close();
     }
-
     //Register
     public long register(User user) {
         db = dbHelper.getReadableDatabase();
-
         // Kiểm tra xem username đã tồn tại hay chưa
         String[] columns = {"username"};
         String selection = "username = ?";
