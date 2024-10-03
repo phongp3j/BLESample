@@ -55,14 +55,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void initview() {
-        edFullname = findViewById(R.id.fullname);
         edUsername = findViewById(R.id.username);
         edPassword = findViewById(R.id.password);
         edCpassword = findViewById(R.id.cpassword);
         registerBtn = findViewById(R.id.register);
         backBtn = findViewById(R.id.back);
-        edEmail = findViewById(R.id.email);
-        edPhone = findViewById(R.id.phone);
     }
 
     @Override

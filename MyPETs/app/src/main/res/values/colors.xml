@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="button_normal_color">#EF5350</color> <!-- Màu đỏ tươi cho trạng thái bình thường -->
+    <color name="button_pressed_color">#E53935</color> <!-- Màu đỏ đậm hơn khi nhấn -->
+    <color name="button_border_color">#FFCDD2</color> <!-- Màu đỏ nhạt cho viền -->
+    <color name="button_shadow_color">#EF9A9A</color> <!-- Màu bóng đỏ nhạt -->
+    <color name="white">#FFFFFF</color> <!-- Màu trắng cho văn bản -->
+    <color name="input_border_default">#BDBDBD</color> <!-- Màu xám nhạt cho viền khi không focus -->
+    <color name="input_border_focused">#EF5350</color> <!-- Màu đỏ tươi cho viền khi focus -->
+    <color name="input_text_color">#212121</color> <!-- Màu xám đậm cho text -->
+    <color name="hint_text_color">#757575</color> <!-- Màu xám nhạt cho hint -->
+    <color name="register_button_normal_color">#42A5F5</color> <!-- Màu xanh dương tươi khi không nhấn -->
+    <color name="register_button_pressed_color">#1E88E5</color> <!-- Màu xanh đậm hơn khi nhấn -->
+    <color name="register_button_border_color">#90CAF9</color> <!-- Viền xanh nhạt cho nút -->
 </resources>
+
+
