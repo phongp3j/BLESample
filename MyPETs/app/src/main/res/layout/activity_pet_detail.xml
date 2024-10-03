@@ -5,23 +5,14 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="10dp"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context=".PetDetailActivity">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvPet"
-        />
+
     <Button
+        android:id="@+id/btn_edit_pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan"
-        android:id="@+id/btScan"
-        />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/rcDevices"
-        />
+        android:text="edit"/>
+
 </LinearLayout>

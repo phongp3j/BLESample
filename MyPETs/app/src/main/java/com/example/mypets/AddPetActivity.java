@@ -16,6 +16,7 @@ import com.example.mypets.SQLite.PetDao;
 public class AddPetActivity extends AppCompatActivity {
 
     public static final String KEY_DEVICE_ADDRESS = "key_device_address";
+    public static final String KEY_PET_DETAILS_EDIT = "key_pet_details_edit";
 
     private static final String TAG = "AddPetActivity";
 
@@ -35,30 +36,65 @@ public class AddPetActivity extends AppCompatActivity {
         initView();
 
         Intent intent = getIntent();
-        edtDeviceAddress.setText(intent.getStringExtra(KEY_DEVICE_ADDRESS));
+        String deviceAddress = intent.getStringExtra(KEY_DEVICE_ADDRESS);
+        pet = (Pet) intent.getSerializableExtra(KEY_PET_DETAILS_EDIT);
+
+        if (pet == null) {
+            // add pet mode
+            edtDeviceAddress.setText(deviceAddress);
+
+            btnAdd.setText("Add pet");
+        } else {
+            // edit pet mode
+            edtDeviceAddress.setText(pet.getDeviceAddress());
+            edtPetName.setText(pet.getName());
+            edtPetAge.setText(String.valueOf(pet.getAge()));
+            edtPetBreed.setText(pet.getBreed());
+            edtPetWeight.setText(String.valueOf(pet.getWeight()));
+            edtHealthInfo.setText("");
+
+            btnAdd.setText("Edit pet");
+        }
 
         btnBack.setOnClickListener(view -> onBackPressed());
 
         btnAdd.setOnClickListener(view -> {
             Log.d(TAG, "onCreate: press button add pet");
 
-            getData();
-
             petDao = new PetDao(this);
-            if (petDao.add(pet) < 0) {
-                Log.e(TAG, "onCreate: failed to add pet");
-                Toast.makeText(this, "Thêm thú cưng thất bại!", Toast.LENGTH_SHORT).show();
+
+            if (pet == null) {
+                Log.d(TAG, "onCreate: -- add pet");
+                pet = new Pet();
+                getData();
+
+                if (petDao.add(pet) < 0) {
+                    Log.e(TAG, "onCreate: failed to add pet");
+                    Toast.makeText(this, "Thêm thú cưng thất bại!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Thêm thú cưng thành công!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onCreate: add pet successful");
+                    finish();
+                }
             } else {
-                Toast.makeText(this, "Thêm thú cưng thành công!", Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "onCreate: add pet successful");
-                finish();
+                Log.d(TAG, "onCreate: -- edit pet");
+                getData();
+
+                if (petDao.update(pet)<0){
+                    Log.e(TAG, "onCreate: failed to edit pet");
+                    Toast.makeText(this, "Cập nhật thú cưng thất bại!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(this, "Cập nhật thú cưng thành công!", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onCreate: edit pet successful");
+                    finish();
+                }
             }
+
 
         });
     }
 
     private void getData() {
-        pet = new Pet();
         pet.setUserId(DataManager.getInstance().getUserId());
         pet.setName(edtPetName.getText().toString());
         pet.setAge(Integer.parseInt(edtPetAge.getText().toString()));
