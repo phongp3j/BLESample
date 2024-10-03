@@ -9,53 +9,63 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         >
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:weightSum="4"
             android:layout_gravity="center"
             android:orientation="horizontal">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/sample_pet_img"
+                android:id="@+id/avt_pet"
+                />
             <LinearLayout
+                android:layout_margin="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
                 android:orientation="vertical"
+                android:layout_gravity="center_vertical"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvTen"
                     android:text="Cậu Vàng"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
                     android:textStyle="bold"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/tvTuoi"
+                    android:textSize="16dp"
                     android:text="2 years"
-                    android:layout_marginLeft="10dp"
                     />
             </LinearLayout>
+            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            >
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvSensor"
-                android:layout_gravity="center"
-                android:text="Chua ket noi sensor"
+                android:textSize="16dp"
+                android:text="Heart Rate: 120bpm"
                 android:textColor="#EDDC46"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tvTrangthai"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:text="Offline"
+                android:textSize="16dp"
+                android:text="Temperature: 101.5F"
                 />
         </LinearLayout>
     </LinearLayout>

@@ -2,14 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/mMyPets"
+        android:icon="@drawable/dog"
         android:title="My Pets"
+
         ></item>
     <item
         android:id="@+id/mAddPet"
+        android:icon="@drawable/add"
         android:title="Add New Pet"
         ></item>
     <item
         android:id="@+id/mUserInfo"
+        android:icon="@drawable/settings"
         android:title="Info"
         ></item>
 </menu>
