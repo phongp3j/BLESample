@@ -107,11 +107,11 @@ public class AddPetActivity extends AppCompatActivity {
 
     private void initView() {
         edtDeviceAddress = findViewById(R.id.edt_device_address);
-        edtPetName = findViewById(R.id.tvTen);
-        edtPetAge = findViewById(R.id.tvTuoi);
-        edtPetBreed = findViewById(R.id.tvType);
-        edtPetWeight = findViewById(R.id.tvWeight);
-        edtHealthInfo = findViewById(R.id.tvHealthInfo);
+        edtPetName = findViewById(R.id.edt_pet_name);
+        edtPetAge = findViewById(R.id.edt_pet_age);
+        edtPetBreed = findViewById(R.id.edt_pet_breed);
+        edtPetWeight = findViewById(R.id.edt_pet_weight);
+        edtHealthInfo = findViewById(R.id.edt_health_info);
 
         btnBack = findViewById(R.id.btBack);
         btnAdd = findViewById(R.id.btAdd);

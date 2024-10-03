@@ -8,29 +8,30 @@
     tools:context=".AddPetActivity">
 
     <LinearLayout
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="#E53935"
-        android:orientation="horizontal"
-        android:id="@+id/toolbar"
         android:gravity="center_vertical"
-        >
+        android:orientation="horizontal">
+
         <ImageView
-            android:layout_margin="10dp"
+            android:contentDescription="logo"
             android:layout_width="38dp"
             android:layout_height="38dp"
+            android:layout_margin="10dp"
             android:src="@drawable/dog"
             app:tint="@color/white" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add New Pet"
-            android:textStyle="bold"
-            android:fontFamily="sans-serif-smallcaps"
-            android:textColor="@color/white"
             android:layout_margin="10dp"
-            android:textSize="19dp"
-            />
+            android:fontFamily="sans-serif-smallcaps"
+            android:text="ADD NEW PET"
+            android:textColor="@color/white"
+            android:textSize="19sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -43,32 +44,75 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Pet name:"/>
+            android:text="Device address:" />
 
         <EditText
+            android:id="@+id/edt_device_address"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Enter the pet name"
-            android:padding="10dp"
             android:layout_margin="5dp"
             android:background="@drawable/edittext_custom"
             android:enabled="false"
-            />
+            android:hint="Device address here"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pet name:" />
+
+        <EditText
+            android:id="@+id/edt_pet_name"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edittext_custom"
+            android:hint="Enter the pet name"
+            android:padding="10dp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Breed:" />
 
         <EditText
-            android:id="@+id/edt_device_address"
+            android:id="@+id/edt_pet_breed"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Enter breed"
             android:layout_margin="5dp"
-            android:padding="10dp"
             android:background="@drawable/edittext_custom"
-            android:enabled="false"
-            />
+            android:hint="Enter breed"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Age:" />
+
+        <EditText
+            android:id="@+id/edt_pet_age"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edittext_custom"
+            android:hint="Enter the pet age"
+            android:inputType="number"
+            android:padding="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weight:" />
+
+        <EditText
+            android:id="@+id/edt_pet_weight"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edittext_custom"
+            android:hint="Enter the pet weight"
+            android:inputType="numberDecimal"
+            android:padding="10dp" />
 
         <TextView
             android:layout_width="match_parent"
@@ -76,15 +120,14 @@
             android:text="Health information:" />
 
         <EditText
-            android:id="@+id/tvType"
+            android:id="@+id/edt_health_info"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/edittext_custom"
             android:hint="Enter health information"
             android:inputType="textMultiLine"
-
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:background="@drawable/edittext_custom"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:padding="10dp" />
 
     </LinearLayout>
 
@@ -100,18 +143,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:background="@drawable/button_custom"
             android:layout_weight="1"
+            android:background="@drawable/button_custom"
             android:text="Back"
             android:textColor="@color/white" />
 
         <Button
             android:id="@+id/btAdd"
             android:layout_width="wrap_content"
-            android:background="@drawable/custom_register_button"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
+            android:background="@drawable/custom_register_button"
             android:text="add or edit Pet here"
             android:textColor="@color/white" />
     </LinearLayout>

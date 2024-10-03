@@ -3,18 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".Fragments.FragmentScanBle">
+
     <Button
         android:id="@+id/btn_scan_ble"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/scan_button_custom"
-        android:text="Scan"
-        android:textColor="@android:color/white"
         android:layout_margin="10dp"
-        android:gravity="center" />
+        android:background="@drawable/scan_button_custom"
+        android:gravity="center"
+        android:text="Scan"
+        android:textColor="@android:color/white" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_ble_devices"
         android:layout_width="match_parent"

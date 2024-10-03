@@ -1,53 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/white"
-    android:layout_margin="15dp"
-    app:cardCornerRadius="15dp"
-    android:layout_height="wrap_content">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:padding="16dp">
-    <TextView
-        android:id="@+id/device_rssi"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="RSSI: -50"
-        android:textSize="14sp" />
+    android:layout_margin="15dp"
+    android:background="@color/white"
+    app:cardCornerRadius="15dp">
 
-    <LinearLayout
-        android:layout_marginStart="16dp"
-        android:layout_width="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="16dp">
 
         <TextView
-            android:id="@+id/device_name"
+            android:id="@+id/device_rssi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Device Name"
-            android:textSize="18sp" />
-
-        <TextView
-            android:id="@+id/device_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Device Address"
+            android:layout_gravity="center"
+            android:text="RSSI: -50"
             android:textSize="14sp" />
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_add_pet"
-        android:layout_width="wrap_content"
-        android:background="@drawable/button_custom"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:text="Add pet"/>
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/device_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Device Name"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/device_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Device Address"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_add_pet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_custom"
+            android:text="Add pet"
+            android:textColor="@color/white" />
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
