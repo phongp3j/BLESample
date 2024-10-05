@@ -65,6 +65,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_pet_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cậu Vàng"
@@ -72,6 +73,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_pet_info"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Golden Retriever, 2 years"
@@ -125,6 +127,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_pet_weight"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="5dp"
@@ -148,6 +151,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_heart_rate"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="5dp"
@@ -171,6 +175,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tv_temperature"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:paddingTop="5dp"
