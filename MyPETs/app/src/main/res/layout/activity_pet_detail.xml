@@ -47,9 +47,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
                 android:orientation="horizontal"
-                android:paddingVertical="10dp"
-                android:layout_marginHorizontal="18dp">
+                android:paddingVertical="10dp">
 
                 <ImageView
                     android:id="@+id/avt_pet"
@@ -85,11 +85,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
                 android:layout_marginVertical="8dp"
                 android:background="@color/white"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="6dp"
-                android:layout_marginHorizontal="18dp">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -97,13 +97,28 @@
                     android:orientation="vertical"
                     android:padding="10dp">
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="12dp"
-                        android:text="Health Metrics"
-                        android:textSize="18sp"
-                        android:textStyle="bold|italic" />
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:padding="12dp"
+                            android:text="Health Metrics"
+                            android:textSize="18sp"
+                            android:textStyle="bold|italic" />
+
+                        <TextView
+                            android:id="@+id/tv_connection_state"
+                            android:padding="12dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="connection_state_here" />
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -192,11 +207,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
                 android:layout_marginVertical="8dp"
                 android:background="@color/white"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="6dp"
-                android:layout_marginHorizontal="18dp">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -232,11 +247,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="18dp"
                 android:layout_marginVertical="8dp"
                 android:background="@color/white"
                 app:cardCornerRadius="15dp"
-                app:cardElevation="6dp"
-                android:layout_marginHorizontal="18dp">
+                app:cardElevation="6dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -278,9 +293,9 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/button_custom"
-            android:layout_margin="10dp"
             android:text="Back"
             android:textColor="@color/white" />
 
@@ -288,10 +303,10 @@
             android:id="@+id/btn_edit_pet"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:layout_marginLeft="10dp"
             android:layout_weight="1"
             android:background="@drawable/custom_register_button"
-            android:layout_margin="10dp"
             android:text="Edit Pet"
             android:textColor="@color/white" />
     </LinearLayout>
