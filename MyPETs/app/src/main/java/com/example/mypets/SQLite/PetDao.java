@@ -54,6 +54,38 @@ public class PetDao {
         return list;
     }
 
+    public Pet getById(int id) throws NullPointerException {
+        Pet findPet = null;
+        db = dbHelper.getReadableDatabase();
+
+        String selection = "id = ?";
+        String[] selectionArgs = {String.valueOf(id)};
+
+        Cursor cursor = null;
+        try {
+            cursor = db.query("pets", null, selection, selectionArgs, null, null, null);
+
+            // Kiểm tra xem cursor có di chuyển đến bản ghi hay không
+            if (cursor != null && cursor.moveToFirst()) {
+                findPet = new Pet(cursor.getInt(0),
+                        cursor.getInt(1),
+                        cursor.getString(2),
+                        cursor.getInt(3),
+                        cursor.getString(4),
+                        cursor.getFloat(5),
+                        cursor.getString(6),
+                        cursor.getString(7));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
+        return findPet;
+    }
+
     public long add(Pet pet) {
         db = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();

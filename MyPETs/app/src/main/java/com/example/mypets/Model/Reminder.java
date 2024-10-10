@@ -1,6 +1,8 @@
 package com.example.mypets.Model;
 
-public class Reminder {
+import java.io.Serializable;
+
+public class Reminder implements Serializable {
 
     private int id;
     private int petId;
