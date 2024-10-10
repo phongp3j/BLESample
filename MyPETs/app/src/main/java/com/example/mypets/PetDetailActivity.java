@@ -122,6 +122,12 @@ public class PetDetailActivity extends AppCompatActivity {
             Intent serviceIntent = new Intent(PetDetailActivity.this, BluetoothLeService.class);
             bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
         }
+
+        findViewById(R.id.btn_reminder).setOnClickListener(view -> {
+            Intent toReminder = new Intent(this, ReminderActivity.class);
+            toReminder.putExtra(ReminderActivity.KEY_PET, pet);
+            startActivity(toReminder);
+        });
     }
 
     @Override

@@ -1,21 +1,27 @@
 package com.example.mypets.Model;
 
-public class Reminder {
+import java.io.Serializable;
+
+public class Reminder implements Serializable {
 
     private int id;
     private int petId;
     private String type;    // "vaccination" hoặc "health checkup"
     private String date;
+    private String time;
+    private int hasDone;    // 0: false, 1: true
     private String createdAt;
 
     public Reminder() {
     }
 
-    public Reminder(int id, int petId, String type, String date, String createdAt) {
+    public Reminder(int id, int petId, String type, String date, String time, int hasDone, String createdAt) {
         this.id = id;
         this.petId = petId;
         this.type = type;
         this.date = date;
+        this.time = time;
+        this.hasDone = hasDone;
         this.createdAt = createdAt;
     }
 
@@ -51,11 +57,27 @@ public class Reminder {
         this.date = date;
     }
 
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     public String getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public int isHasDone() {
+        return hasDone;
+    }
+
+    public void setHasDone(int hasDone) {
+        this.hasDone = hasDone;
     }
 }
