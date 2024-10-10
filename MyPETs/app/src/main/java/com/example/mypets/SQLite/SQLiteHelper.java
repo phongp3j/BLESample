@@ -1,15 +1,10 @@
 package com.example.mypets.SQLite;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
-
-import com.example.mypets.Model.Pet;
-import com.example.mypets.Model.User;
 
 public class SQLiteHelper extends SQLiteOpenHelper {
 
@@ -62,6 +57,8 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "pet_id INTEGER NOT NULL," +
                 "type VARCHAR(100) NOT NULL," +
                 "date DATE NOT NULL," +
+                "time TIME NOT NULL," +
+                "has_done INTEGER NOT NULL," +
                 "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                 "FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE" +
                 ")";
