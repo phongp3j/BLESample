@@ -83,7 +83,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -108,7 +109,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="7dp"
-                    android:background="@drawable/dashed_line" />
+                    android:background="@drawable/dashed_line"
+                    android:paddingVertical="16dp" />
 
                 <TextView
                     android:id="@+id/tv_empty_pending_reminders"
@@ -143,7 +145,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginHorizontal="7dp"
-                    android:background="@drawable/dashed_line" />
+                    android:background="@drawable/dashed_line"
+                    android:paddingVertical="16dp" />
 
                 <TextView
                     android:id="@+id/tv_empty_completed_reminders"

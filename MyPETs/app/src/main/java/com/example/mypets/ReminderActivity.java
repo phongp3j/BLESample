@@ -80,23 +80,12 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
     @Override
     protected void onResume() {
         super.onResume();
+        updateCompletedReminders();
+        updatePendingReminders();
+    }
 
-        if (pet != null) {
-            completedReminderByPetId = reminderDao.getAll(pet.getId(), true);
-            pendingReminderByPetId = reminderDao.getAll(pet.getId(), false);
-        }
-
-        if (pendingReminderByPetId.isEmpty()) {
-            // hiển thị rỗng
-            rvPendingReminders.setVisibility(View.GONE);
-            tvEmptyPendingReminder.setVisibility(View.VISIBLE);
-        } else {
-            rvPendingReminders.setVisibility(View.VISIBLE);
-            tvEmptyPendingReminder.setVisibility(View.GONE);
-
-            pendingReminderAdapter.setList(pendingReminderByPetId);
-        }
-
+    public void updateCompletedReminders() {
+        completedReminderByPetId = reminderDao.getAll(pet.getId(), true);
         if (completedReminderByPetId.isEmpty()) {
             // hiển thị rỗng
             rvCompletedReminders.setVisibility(View.GONE);
@@ -106,6 +95,20 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
             tvEmptyCompletedReminder.setVisibility(View.GONE);
 
             completedReminderAdapter.setList(completedReminderByPetId);
+        }
+    }
+
+    public void updatePendingReminders() {
+        pendingReminderByPetId = reminderDao.getAll(pet.getId(), false);
+        if (pendingReminderByPetId.isEmpty()) {
+            // hiển thị rỗng
+            rvPendingReminders.setVisibility(View.GONE);
+            tvEmptyPendingReminder.setVisibility(View.VISIBLE);
+        } else {
+            rvPendingReminders.setVisibility(View.VISIBLE);
+            tvEmptyPendingReminder.setVisibility(View.GONE);
+
+            pendingReminderAdapter.setList(pendingReminderByPetId);
         }
     }
 
@@ -134,57 +137,54 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
 
         switch (btnPosition) {
             case ReminderAdapter.BTN_DONE:
-                updateReminder.setHasDone(1);
-                if (reminderDao.update(updateReminder) > 0) {
-                    Toast.makeText(this, "Reminder marked as done", Toast.LENGTH_SHORT).show();
-
-                    Log.d(TAG, "onItemClick: Reminder marked as done Successfully");
-                } else {
-                    Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
-
-                    Log.e(TAG, "onItemClick: Reminder marked as done Failed");
-                }
-
+                handleDoneAction(updateReminder);
                 break;
             case ReminderAdapter.BTN_SNOOZE:
-                int snoozeMinutes = 30;
-
-                SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-                try {
-                    Date dateTime = dateTimeFormat.parse(updateReminder.getDate() + " " + updateReminder.getTime());
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(dateTime);
-                    calendar.add(Calendar.MINUTE, snoozeMinutes);
-
-                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-
-                    String newDate, newTime;
-                    newDate = dateFormat.format(calendar.getTime());
-                    newTime = timeFormat.format(calendar.getTime());
-
-                    Log.d(TAG, "onItemClick: new time: " + newTime);
-                    Log.d(TAG, "onItemClick: new date: " + newDate);
-
-                    updateReminder.setDate(newDate);
-                    updateReminder.setTime(newTime);
-
-                    if (reminderDao.update(updateReminder) > 0) {
-                        Toast.makeText(this, "Reminder snooze 30 minutes", Toast.LENGTH_SHORT).show();
-
-                        Log.d(TAG, "onItemClick: Reminder snooze 30 minutes Successfully");
-                    } else {
-                        Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
-
-                        Log.e(TAG, "onItemClick: Reminder snooze 30 minutes Failed");
-                    }
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                    Toast.makeText(this, "Failed Parse date time", Toast.LENGTH_SHORT).show();
-                }
+                handleSnoozeAction(updateReminder);
                 break;
         }
+    }
 
-        onResume();
+    private void handleSnoozeAction(Reminder updateReminder) {
+        int snoozeMinutes = 30;
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        try {
+            Date dateTime = dateTimeFormat.parse(updateReminder.getDate() + " " + updateReminder.getTime());
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(dateTime);
+            calendar.add(Calendar.MINUTE, snoozeMinutes);
+
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+            String newDate, newTime;
+            newDate = dateFormat.format(calendar.getTime());
+            newTime = timeFormat.format(calendar.getTime());
+
+            updateReminder.setDate(newDate);
+            updateReminder.setTime(newTime);
+
+            if (reminderDao.update(updateReminder) > 0) {
+                Toast.makeText(this, "Reminder snoozed for 30 minutes!", Toast.LENGTH_SHORT).show();
+                updatePendingReminders();
+            } else {
+                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Failed Parse date time", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void handleDoneAction(Reminder updateReminder) {
+        // Xử lý khi người dùng chọn nút Done
+        updateReminder.setHasDone(1);
+        if (reminderDao.update(updateReminder) > 0) {
+            Toast.makeText(this, "Reminder marked as Done", Toast.LENGTH_SHORT).show();
+            updatePendingReminders();
+            updateCompletedReminders();
+        } else {
+            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+        }
     }
 }

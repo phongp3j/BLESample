@@ -1,7 +1,10 @@
 package com.example.mypets;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -14,9 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mypets.Model.Pet;
 import com.example.mypets.Model.Reminder;
+import com.example.mypets.Receiver.ReminderReceiver;
 import com.example.mypets.SQLite.ReminderDao;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AddReminderActivity extends AppCompatActivity {
 
@@ -101,13 +108,20 @@ public class AddReminderActivity extends AppCompatActivity {
                     Toast.makeText(this, "Save reminder successfully!", Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onCreate: save reminder successfully");
 
+                    try {
+                        setReminderAlarm();
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                        Log.e(TAG, "onCreate: " + e.getMessage());
+                    }
+
                     onBackPressed();
                 } else
                     Log.w(TAG, "onCreate: save reminder failed");
             }
         });
 
-        btnCancel.setOnClickListener(view->{
+        btnCancel.setOnClickListener(view -> {
             onBackPressed();
         });
 
@@ -124,6 +138,25 @@ public class AddReminderActivity extends AppCompatActivity {
             return false;
 
         return true;
+    }
+
+    public void setReminderAlarm() throws ParseException {
+        SimpleDateFormat dateTimeFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        Date dateTime = dateTimeFormat.parse(reminder.getDate() + " " + reminder.getTime());
+
+        long triggerAtMillis = dateTime.getTime();
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+
+        // BroadcastReceiver để nhận sự kiện
+        Intent intent = new Intent(this, ReminderReceiver.class);
+        // Truyền đối tượng Reminder qua Intent
+        intent.putExtra(ReminderReceiver.KEY_REMINDER, reminder);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, reminder.getId(), intent, PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+
+        if (alarmManager != null) {
+            // Đặt báo thức
+            alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+        }
     }
 
     private void initView() {
