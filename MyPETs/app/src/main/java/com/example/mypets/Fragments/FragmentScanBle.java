@@ -21,8 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mypets.Adapters.BleDeviceAdapter;
+import com.example.mypets.Adapters.SavedBleDeviceAdapter;
 import com.example.mypets.AddPetActivity;
+import com.example.mypets.Data.DataManager;
+import com.example.mypets.Model.Pet;
 import com.example.mypets.R;
+import com.example.mypets.SQLite.PetDao;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,30 +45,52 @@ public class FragmentScanBle extends Fragment {
 
     private BluetoothAdapter bluetoothAdapter;
     private BluetoothLeScanner bluetoothLeScanner;
+
+    private List<Pet> allPet, savedPetList;
+    private List<ScanResult> savedScanResults;
+
     private HashSet<String> addressMap;
     private List<ScanResult> scanResults;
-    private BleDeviceAdapter bleDeviceAdapter;
 
+    private BleDeviceAdapter bleDeviceAdapter;
+    private SavedBleDeviceAdapter savedDeviceAdapter;
     private final ScanCallback scanCallback = new ScanCallback() {
         @Override
         public void onScanResult(int callbackType, ScanResult result) {
             String deviceAddress = result.getDevice().getAddress();
 
             @SuppressLint("MissingPermission") String deviceName = result.getDevice().getName();
-
             if (!addressMap.contains(deviceAddress) && deviceName != null) {
-                addressMap.add(deviceAddress);
-                scanResults.add(result);
-                bleDeviceAdapter.notifyDataSetChanged();
+                int findIndex = findSavedDevice(deviceAddress);
+
+                if (findIndex != -1) {
+                    if (!savedPetList.contains(allPet.get(findIndex))) {
+                        savedPetList.add(allPet.get(findIndex));
+                        savedScanResults.add(result);
+                        savedDeviceAdapter.notifyDataSetChanged();
+                    }
+                } else {
+                    addressMap.add(deviceAddress);
+                    scanResults.add(result);
+                    bleDeviceAdapter.notifyDataSetChanged();
+                }
             }
         }
     };
-
+    private PetDao petDao;
     private Button btnScan;
-    private RecyclerView rvBleDevices;
+    private RecyclerView rvBleDevices, rvSavedBleDevices;
     private boolean scanning = false;
 
     public FragmentScanBle() {
+    }
+
+    private int findSavedDevice(String deviceAddress) {
+        for (int i = 0; i < allPet.size(); i++) {
+            if (deviceAddress.equals(allPet.get(i).getDeviceAddress()))
+                return i;
+        }
+        return -1;
     }
 
     @Override
@@ -77,6 +103,14 @@ public class FragmentScanBle extends Fragment {
             Intent enableBluetoothIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
             startActivityForResult(enableBluetoothIntent, REQUEST_ENABLE_BLUETOOTH);
         }
+
+        petDao = new PetDao(getContext());
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        allPet = petDao.getAll(DataManager.getInstance().getUserId());
     }
 
     @Override
@@ -86,7 +120,14 @@ public class FragmentScanBle extends Fragment {
 
         btnScan = view.findViewById(R.id.btn_scan_ble);
         rvBleDevices = view.findViewById(R.id.rv_ble_devices);
+        rvSavedBleDevices = view.findViewById(R.id.rv_saved_ble_devices);
+
         rvBleDevices.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvSavedBleDevices.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        allPet = new ArrayList<>();
+        savedPetList = new ArrayList<>();
+        savedScanResults = new ArrayList<>();
 
         addressMap = new HashSet<>();
         scanResults = new ArrayList<>();
@@ -111,6 +152,10 @@ public class FragmentScanBle extends Fragment {
         });
         rvBleDevices.setAdapter(bleDeviceAdapter);
 
+        // ble device saved
+        savedDeviceAdapter = new SavedBleDeviceAdapter(savedScanResults, savedPetList);
+        rvSavedBleDevices.setAdapter(savedDeviceAdapter);
+
         btnScan.setOnClickListener(v -> {
             // bắt đầu quét
             Log.d(TAG, "onViewCreated: click scan");
@@ -126,8 +171,13 @@ public class FragmentScanBle extends Fragment {
             bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
         if (!scanning) {
+            savedPetList.clear();
+            savedScanResults.clear();
+            savedDeviceAdapter.notifyDataSetChanged();
+
             addressMap.clear();
             scanResults.clear();
+            bleDeviceAdapter.notifyDataSetChanged();
 
             btnScan.setText("SCANNING...");
             btnScan.setEnabled(false);
@@ -167,5 +217,12 @@ public class FragmentScanBle extends Fragment {
     public void onPause() {
         super.onPause();
         stopBleScan();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (petDao != null)
+            petDao.close();
     }
 }
