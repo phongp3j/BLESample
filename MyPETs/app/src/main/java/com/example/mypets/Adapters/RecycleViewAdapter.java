@@ -1,5 +1,6 @@
 package com.example.mypets.Adapters;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,12 +48,12 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
     public void onBindViewHolder(@NonNull HomeViewHolder holder, int position) {
         Pet pet = list.get(position);
 
-        holder.ivPetImage.setImageResource(R.drawable.sample_pet_img);
+        if (pet.getImagePath() != null) {
+            holder.ivPetImage.setImageURI(Uri.parse(pet.getImagePath()));
+            holder.ivPetImage.setPadding(0, 0, 0, 0);
+        }
         holder.tvPetName.setText(pet.getName());
         holder.tvPetAge.setText(pet.getAge() + " years");
-        holder.tvHeartRate.setText("Heart Rate: 122bpm");
-        holder.tvTemperature.setText("Temperature: 101.5F");
-
     }
 
     @Override
@@ -66,7 +67,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
 
     public class HomeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final ImageView ivPetImage;
-        private final TextView tvPetName, tvPetAge, tvHeartRate, tvTemperature;
+        private final TextView tvPetName, tvPetAge;
 
         public HomeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -74,8 +75,6 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             ivPetImage = itemView.findViewById(R.id.iv_pet_image);
             tvPetName = itemView.findViewById(R.id.tv_pet_name);
             tvPetAge = itemView.findViewById(R.id.tv_pet_age);
-            tvHeartRate = itemView.findViewById(R.id.tv_heart_rate);
-            tvTemperature = itemView.findViewById(R.id.tv_temperature);
 
             itemView.setOnClickListener(this);
         }

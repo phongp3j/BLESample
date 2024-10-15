@@ -8,10 +8,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.ServiceConnection;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.mypets.Model.Pet;
 import com.example.mypets.Model.SensorState;
+import com.example.mypets.SQLite.PetDao;
 import com.example.mypets.Services.BluetoothLeService;
 import com.example.mypets.Utils.BluetoothGattUtils;
 
@@ -28,10 +31,14 @@ public class PetDetailActivity extends AppCompatActivity {
 
     public static final String KEY_PET_DETAILS_DISPLAY = "key_pet_details";
     private static final String TAG = "PetDetailActivity";
-    private TextView tvConnectionState, tvPetName, tvPetInfo, tvPetWeight, tvHeartRate, tvTemperature;
+
+
+    private TextView tvConnectionState, tvPetName, tvPetInfo, tvPetWeight, tvHeartRate, tvTemperature, tvNote;
     private Button btnEditPet, btnBack;
+    private ImageView ivPetImage;
 
     private Pet pet;
+    private PetDao petDao;
     private String deviceAddress;
     private BluetoothLeService bluetoothLeService;
 
@@ -100,6 +107,8 @@ public class PetDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pet_detail);
 
+        petDao = new PetDao(this);
+
         Intent intent = getIntent();
         pet = (Pet) intent.getSerializableExtra(KEY_PET_DETAILS_DISPLAY);
         deviceAddress = pet.getDeviceAddress();
@@ -140,6 +149,22 @@ public class PetDetailActivity extends AppCompatActivity {
         filter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
 
         registerReceiver(gattUpdateReceiver, filter);
+
+        fillData();
+    }
+
+    private void fillData() {
+        pet = petDao.getById(pet.getId());
+
+        if (pet.getImagePath() != null) {
+            ivPetImage.setImageURI(Uri.parse(pet.getImagePath()));
+            ivPetImage.setPadding(0, 0, 0, 0);
+        }
+        tvPetName.setText(pet.getName());
+        tvPetInfo.setText(pet.getBreed() + ", " + pet.getAge() + " years");
+        tvPetWeight.setText(String.valueOf(pet.getWeight()) + " kg");
+
+        tvNote.setText(pet.getNote());
     }
 
     @Override
@@ -152,25 +177,26 @@ public class PetDetailActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         unbindService(serviceConnection);
+
+        if (petDao != null)
+            petDao.close();
     }
 
     private void initView() {
         // find widget
+        ivPetImage = findViewById(R.id.iv_pet_image);
         tvConnectionState = findViewById(R.id.tv_connection_state);
         tvPetName = findViewById(R.id.tv_pet_name);
         tvPetInfo = findViewById(R.id.tv_pet_info);
         tvPetWeight = findViewById(R.id.tv_pet_weight);
         tvHeartRate = findViewById(R.id.tv_heart_rate);
         tvTemperature = findViewById(R.id.tv_temperature);
+        tvNote = findViewById(R.id.tv_note);
 
         btnBack = findViewById(R.id.btn_back);
         btnEditPet = findViewById(R.id.btn_edit_pet);
 
         updateSensorStatus(SensorState.CONNECTING);
-
-        tvPetName.setText(pet.getName());
-        tvPetInfo.setText(pet.getBreed() + ", " + pet.getAge() + " years");
-        tvPetWeight.setText(String.valueOf(pet.getWeight()) + " kg");
 
         tvHeartRate.setText("---");
         tvTemperature.setText("---");

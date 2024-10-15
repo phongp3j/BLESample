@@ -34,7 +34,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "age INTEGER NOT NULL," +
                 "breed VARCHAR(100)," +
                 "weight FLOAT," +
-                "deviceAddress VARCHAR(50) NOT NULL," +
+                "device_address VARCHAR(50) NOT NULL," +
+                "image_path VARCHAR(200)," +
+                "note VARCHAR(1500)," +
                 "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
                 "FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE" +
                 ")";

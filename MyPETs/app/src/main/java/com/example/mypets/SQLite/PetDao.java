@@ -44,8 +44,10 @@ public class PetDao {
                     cursor.getString(4),
                     cursor.getFloat(5),
                     cursor.getString(6),
-                    cursor.getString(7)
-            ));
+                    cursor.getString(9),
+                    cursor.getString(7),
+                    cursor.getString(8))
+            );
         }
 
         if (cursor != null)
@@ -74,7 +76,9 @@ public class PetDao {
                         cursor.getString(4),
                         cursor.getFloat(5),
                         cursor.getString(6),
-                        cursor.getString(7));
+                        cursor.getString(9),
+                        cursor.getString(7),
+                        cursor.getString(8));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +98,9 @@ public class PetDao {
         values.put("age", pet.getAge());
         values.put("breed", pet.getBreed());
         values.put("weight", pet.getWeight());
-        values.put("deviceAddress", pet.getDeviceAddress());
+        values.put("device_address", pet.getDeviceAddress());
+        values.put("image_path", pet.getImagePath());
+        values.put("note", pet.getNote());
 
         return db.insert("pets", null, values);
     }
@@ -108,11 +114,14 @@ public class PetDao {
         values.put("age", pet.getAge());
         values.put("breed", pet.getBreed());
         values.put("weight", pet.getWeight());
-        values.put("deviceAddress", pet.getDeviceAddress());
+        values.put("device_address", pet.getDeviceAddress());
+        values.put("image_path", pet.getImagePath());
+        values.put("note", pet.getNote());
 
         String whereClause = "id = ?";
         String[] whereArgs = {String.valueOf(pet.getId())};
 
         return db.update("pets", values, whereClause, whereArgs);
     }
+
 }
