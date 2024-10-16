@@ -1,6 +1,7 @@
 package com.example.mypets.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -24,6 +25,7 @@ import com.example.mypets.Adapters.BleDeviceAdapter;
 import com.example.mypets.Adapters.SavedBleDeviceAdapter;
 import com.example.mypets.AddPetActivity;
 import com.example.mypets.Data.DataManager;
+import com.example.mypets.MainActivity;
 import com.example.mypets.Model.Pet;
 import com.example.mypets.R;
 import com.example.mypets.SQLite.PetDao;
@@ -142,13 +144,26 @@ public class FragmentScanBle extends Fragment {
         if (bluetoothAdapter != null)
             bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
+        // todo check nhấn ble device
         bleDeviceAdapter = new BleDeviceAdapter(scanResults, position -> {
-            Log.d(TAG, "onViewCreated: click device position: " + position);
-            ScanResult scanResult = scanResults.get(position);
+            Activity currActivity = getActivity();
 
-            Intent intent = new Intent(getContext(), AddPetActivity.class);
-            intent.putExtra(AddPetActivity.KEY_DEVICE_ADDRESS, scanResult.getDevice().getAddress());
-            startActivity(intent);
+            if (currActivity instanceof MainActivity) {
+                // Fragment được gọi từ MainActivity
+                Log.d(TAG, "MainActivity: click device position: " + position);
+                ScanResult scanResult = scanResults.get(position);
+
+                Intent intent = new Intent(getContext(), AddPetActivity.class);
+                intent.putExtra(AddPetActivity.KEY_DEVICE_ADDRESS, scanResult.getDevice().getAddress());
+                startActivity(intent);
+            } else if (currActivity instanceof AddPetActivity) {
+                // Fragment được gọi từ AddPetActivity
+                Log.d(TAG, "AddPetActivity: click device position: " + position);
+                ScanResult scanResult = scanResults.get(position);
+
+                ((AddPetActivity) currActivity).returnToAddPetFragment(scanResult.getDevice().getAddress());
+            }
+
         });
         rvBleDevices.setAdapter(bleDeviceAdapter);
 

@@ -121,6 +121,7 @@ public class PetDetailActivity extends AppCompatActivity {
             Log.d(TAG, "onCreate: press btn edit pet id = " + pet.getId() + ", name = " + pet.getName());
 
             Intent intentToEditPet = new Intent(this, AddPetActivity.class);
+            intentToEditPet.putExtra(AddPetActivity.KEY_DEVICE_ADDRESS, pet.getDeviceAddress());
             intentToEditPet.putExtra(AddPetActivity.KEY_PET_DETAILS_EDIT, pet);
             startActivity(intentToEditPet);
         });
