@@ -3,7 +3,7 @@ package com.example.mypets.Model;
 public class HealthData {
 
     private int id;
-    private int deviceId;
+    private int petId;
     private int heartRate;          // unit: bpm
     private float temperature;      // unit: độ C
     private String recordedAt;
@@ -11,9 +11,9 @@ public class HealthData {
     public HealthData() {
     }
 
-    public HealthData(int id, int deviceId, int heartRate, float temperature, String recordedAt) {
+    public HealthData(int id, int petId, int heartRate, float temperature, String recordedAt) {
         this.id = id;
-        this.deviceId = deviceId;
+        this.petId = petId;
         this.heartRate = heartRate;
         this.temperature = temperature;
         this.recordedAt = recordedAt;
@@ -27,12 +27,12 @@ public class HealthData {
         this.id = id;
     }
 
-    public int getDeviceId() {
-        return deviceId;
+    public int getPetId() {
+        return petId;
     }
 
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
+    public void setPetId(int petId) {
+        this.petId = petId;
     }
 
     public int getHeartRate() {

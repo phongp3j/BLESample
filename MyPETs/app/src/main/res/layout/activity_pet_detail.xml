@@ -62,9 +62,9 @@
                         android:id="@+id/iv_pet_image"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
+                        android:contentDescription="pet image"
                         android:padding="36dp"
                         android:scaleType="centerCrop"
-                        android:contentDescription="pet image"
                         android:src="@drawable/ic_image_search_24" />
                 </androidx.cardview.widget.CardView>
 
@@ -213,6 +213,17 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
+            <TextView
+                android:id="@+id/btn_show_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="19dp"
+                android:paddingHorizontal="8dp"
+                android:paddingVertical="16dp"
+                android:text="show history"
+                android:textColor="@color/register_button_border_color"
+                android:textStyle="italic" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"

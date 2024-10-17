@@ -38,18 +38,18 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 "image_path VARCHAR(200)," +
                 "note VARCHAR(1500)," +
                 "created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                "FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE" +
+                "FOREIGN KEY (user_id) REFERENCES Users(id) ON DELETE CASCADE" +
                 ")";
         db.execSQL(CREATE_PETS_TABLE);
 
         // Tạo bảng HealthData
         String CREATE_HEALTHDATA_TABLE = "CREATE TABLE HealthData (" +
                 "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                "device_id INTEGER NOT NULL," +
+                "pet_id INTEGER NOT NULL," +
                 "heart_rate INTEGER," +
                 "temperature FLOAT," +
                 "recorded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP," +
-                "FOREIGN KEY (device_id) REFERENCES Pets(id) ON DELETE CASCADE" +
+                "FOREIGN KEY (pet_id) REFERENCES Pets(id) ON DELETE CASCADE" +
                 ")";
         db.execSQL(CREATE_HEALTHDATA_TABLE);
 

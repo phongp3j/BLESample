@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.mypets.Model.HealthData;
 import com.example.mypets.Model.Pet;
 import com.example.mypets.Model.SensorState;
+import com.example.mypets.SQLite.HealthDataDao;
 import com.example.mypets.SQLite.PetDao;
 import com.example.mypets.Services.BluetoothLeService;
 import com.example.mypets.Utils.BluetoothGattUtils;
@@ -33,12 +35,14 @@ public class PetDetailActivity extends AppCompatActivity {
     private static final String TAG = "PetDetailActivity";
 
 
-    private TextView tvConnectionState, tvPetName, tvPetInfo, tvPetWeight, tvHeartRate, tvTemperature, tvNote;
+    private TextView tvConnectionState, tvPetName, tvPetInfo, tvPetWeight, tvHeartRate, tvTemperature, tvNote, btnShowHistory;
     private Button btnEditPet, btnBack;
     private ImageView ivPetImage;
 
     private Pet pet;
     private PetDao petDao;
+    private HealthDataDao healthDataDao;
+    private HealthData currHealthData;
     private String deviceAddress;
     private BluetoothLeService bluetoothLeService;
 
@@ -98,9 +102,25 @@ public class PetDetailActivity extends AppCompatActivity {
 
                 // Cập nhật UI với dữ liệu nhận được
                 updateData(uuid, data);
+
+                // Lưu dữ liệu nhận được
+                saveData();
             }
         }
     };
+
+    private void saveData() {
+        Log.d(TAG, "saveData: receive " + currHealthData.getHeartRate() + " bpm, " + currHealthData.getTemperature() + " *C");
+        if (currHealthData.getHeartRate() == 0) {
+            return;
+        }
+        if (currHealthData.getTemperature() == 0) {
+            return;
+        }
+
+        healthDataDao.add(currHealthData);
+        Log.d(TAG, "saveData: successfully");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +128,10 @@ public class PetDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pet_detail);
 
         petDao = new PetDao(this);
+        healthDataDao = new HealthDataDao(this);
+
+        currHealthData = new HealthData();
+        currHealthData.setPetId(pet.getId());
 
         Intent intent = getIntent();
         pet = (Pet) intent.getSerializableExtra(KEY_PET_DETAILS_DISPLAY);
@@ -137,6 +161,12 @@ public class PetDetailActivity extends AppCompatActivity {
             Intent toReminder = new Intent(this, ReminderActivity.class);
             toReminder.putExtra(ReminderActivity.KEY_PET, pet);
             startActivity(toReminder);
+        });
+
+        btnShowHistory.setOnClickListener(view -> {
+            Intent toShowHistory = new Intent(this, HealthDataActivity.class);
+            toShowHistory.putExtra(HealthDataActivity.KEY_PET_ID, pet.getId());
+            startActivity(toShowHistory);
         });
     }
 
@@ -181,6 +211,9 @@ public class PetDetailActivity extends AppCompatActivity {
 
         if (petDao != null)
             petDao.close();
+
+        if (healthDataDao != null)
+            healthDataDao.close();
     }
 
     private void initView() {
@@ -193,6 +226,8 @@ public class PetDetailActivity extends AppCompatActivity {
         tvHeartRate = findViewById(R.id.tv_heart_rate);
         tvTemperature = findViewById(R.id.tv_temperature);
         tvNote = findViewById(R.id.tv_note);
+
+        btnShowHistory = findViewById(R.id.btn_show_history);
 
         btnBack = findViewById(R.id.btn_back);
         btnEditPet = findViewById(R.id.btn_edit_pet);
@@ -210,9 +245,11 @@ public class PetDetailActivity extends AppCompatActivity {
 
     private void updateData(String uuid, int data) {
         if (BluetoothGattUtils.isHeartRateMeasurement(uuid)) {
+            currHealthData.setHeartRate(data);
             Log.d(TAG, "updateData: HM " + data);
             tvHeartRate.setText(data + " bpm");
         } else if (BluetoothGattUtils.isTemperatureMeasurement(uuid)) {
+            currHealthData.setTemperature(data);
             Log.d(TAG, "updateData: TM " + data);
             tvTemperature.setText(data + " F");
         } else if (BluetoothGattUtils.isBatteryLevel(uuid)) {
