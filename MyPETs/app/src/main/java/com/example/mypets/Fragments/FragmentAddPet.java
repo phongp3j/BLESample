@@ -96,7 +96,6 @@ public class FragmentAddPet extends Fragment {
             edtHealthInfo.setText(String.valueOf(mPetDetailsEdit.getNote()));
         }
 
-        // todo check nhấn change address
         btnChangeAddress.setOnClickListener(v -> {
             Activity currActivity = getActivity();
             if (currActivity instanceof AddPetActivity)

@@ -144,7 +144,6 @@ public class FragmentScanBle extends Fragment {
         if (bluetoothAdapter != null)
             bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
-        // todo check nhấn ble device
         bleDeviceAdapter = new BleDeviceAdapter(scanResults, position -> {
             Activity currActivity = getActivity();
 

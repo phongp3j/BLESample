@@ -1,6 +1,7 @@
 package com.example.mypets;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -63,7 +64,7 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
         rvCompletedReminders.setAdapter(completedReminderAdapter);
 
         if (pet != null) {
-//            avtPet.setImageResource("");
+            avtPet.setImageURI(Uri.parse(pet.getImagePath()));
             tvPetName.setText(pet.getName());
             tvPetInfo.setText(pet.getBreed() + ", " + pet.getAge() + "years");
 
