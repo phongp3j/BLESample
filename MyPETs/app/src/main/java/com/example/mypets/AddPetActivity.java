@@ -28,7 +28,6 @@ public class AddPetActivity extends AppCompatActivity {
         mDeviceAddress = intent.getStringExtra(KEY_DEVICE_ADDRESS);
         mPetDetailsEdit = (Pet) intent.getSerializableExtra(KEY_PET_DETAILS_EDIT);
 
-        // todo chuyen sang FragmentAddPet
         if (savedInstanceState == null) {
             FragmentAddPet addPetFragment = FragmentAddPet.newInstance(mDeviceAddress, mPetDetailsEdit);
             getSupportFragmentManager()

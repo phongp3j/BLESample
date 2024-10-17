@@ -46,8 +46,8 @@ public class ReminderReceiver extends BroadcastReceiver {
         // Tạo thông báo với PendingIntent
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "REMINDER_CHANNEL")
                 .setSmallIcon(R.drawable.dog)
-                .setContentTitle("Reminder: " + pet.getName() + " - " + reminder.getType())
-                .setContentText("It's time to complete your reminder!")
+                .setContentTitle("Reminder for " + pet.getName() + ": " + reminder.getType())
+                .setContentText("Don't forget! It's time for your scheduled task.")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(true)                                                        // Thông báo tự động xoá sau khi người dùng chạm vào
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)) // Thiết lập âm thanh
