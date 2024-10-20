@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:fontFamily="sans-serif-smallcaps"
-            android:text="HEALTH DATA"
+            android:text="@string/health_data"
             android:textColor="@color/white"
             android:textSize="19sp"
             android:textStyle="bold" />

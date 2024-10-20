@@ -1,3 +1,89 @@
 <resources>
-    <string name="app_name">MyPETs</string>
+    <string name="app_name">Pets Care</string>
+    <string name="logo">logo</string>
+
+    <string name="set_reminder">SET REMINDER</string>
+    <string name="select_pet">Select Pet</string>
+    <string name="select_your_pet">Select your pet</string>
+    <string name="type_of_reminder">Type of Reminder</string>
+    <string name="example_vaccination">e.g... vaccination</string>
+    <string name="time">Time</string>
+    <string name="select_time">Select time</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+
+    <string name="health_data">HEALTH DATA</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+
+    <string name="pets_care">PETS CARE</string>
+    <string name="num_pet">Number of pet: %d</string>
+
+    <string name="pet_detail">PET DETAIL</string>
+    <string name="health_metrics">Health Metrics</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="temperature">Temperature</string>
+    <string name="show_history">Show History</string>
+    <string name="notes">Notes</string>
+
+    <string name="reminder">REMINDER</string>
+    <string name="add_reminder">Add reminder</string>
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="empty">Empty</string>
+
+    <string name="add_new_pet">ADD NEW PET</string>
+    <string name="device_address">Device address</string>
+    <string name="change">Change</string>
+    <string name="pet_name">Pet name</string>
+    <string name="enter_pet_name">Enter the pet name</string>
+    <string name="breed">Breed</string>
+    <string name="enter_breed">Enter breed</string>
+    <string name="age">Age</string>
+    <string name="enter_pet_age">Enter the pet age</string>
+    <string name="weight">Weight</string>
+    <string name="enter_pet_weight">Enter the pet weight</string>
+    <string name="health_information">Health information</string>
+    <string name="enter_health_information">Enter health information</string>
+    <string name="back">Back</string>
+
+    <string name="scan">Scan</string>
+    <string name="scanning">Scanning...</string>
+    <string name="available_devices">Available Devices</string>
+    <string name="saved_devices">Saved Devices</string>
+    <string name="add_pet">Add pet</string>
+    <string name="edit_pet">Edit</string>
+
+    <string name="breed_age_info">%s, %d years</string>
+    <string name="age_info">%d years</string>
+    <string name="heart_rate_info">Heart Rate: %d bpm</string>
+    <string name="temperature_info">Temperature: %f °C</string>
+    <string name="timestamp">Timestamp: %s</string>
+
+    <string name="connecting">Connecting</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+
+    <string name="completed_label">Completed</string>
+    <string name="done">Done</string>
+    <string name="snooze">Snooze</string>
+
+    <string name="my_pets">My Pets</string>
+    <string name="add_new_pet_label">Add New Pet</string>
+    <string name="setting">Setting</string>
+
+    <string name="reminder_done">Reminder marked as Done!</string>
+    <string name="reminder_snooze">Reminder snoozed for 30 minutes!</string>
+    <string name="reminder_failed">Failed</string>
+
+    <string name="language">Language</string>
+    <string name="account_info">Account Information</string>
+    <string name="support">Support</string>
+    <string name="select_language">Select Language</string>
+    <string name="english">English</string>
+    <string name="vietnamese">Vietnamese</string>
 </resources>

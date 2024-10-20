@@ -66,7 +66,7 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
         if (pet != null) {
             avtPet.setImageURI(Uri.parse(pet.getImagePath()));
             tvPetName.setText(pet.getName());
-            tvPetInfo.setText(pet.getBreed() + ", " + pet.getAge() + "years");
+            tvPetInfo.setText(getResources().getString(R.string.breed_age_info, pet.getBreed(), pet.getAge()));
 
             Log.d(TAG, "onCreate: __" + pet.getName());
 
@@ -166,26 +166,25 @@ public class ReminderActivity extends AppCompatActivity implements ReminderAdapt
             updateReminder.setTime(newTime);
 
             if (reminderDao.update(updateReminder) > 0) {
-                Toast.makeText(this, "Reminder snoozed for 30 minutes!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.reminder_snooze), Toast.LENGTH_SHORT).show();
                 updatePendingReminders();
             } else {
-                Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, getResources().getString(R.string.reminder_failed), Toast.LENGTH_SHORT).show();
             }
         } catch (ParseException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Failed Parse date time", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.reminder_failed), Toast.LENGTH_SHORT).show();
         }
     }
 
     private void handleDoneAction(Reminder updateReminder) {
-        // Xử lý khi người dùng chọn nút Done
         updateReminder.setHasDone(1);
         if (reminderDao.update(updateReminder) > 0) {
-            Toast.makeText(this, "Reminder marked as Done", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.reminder_done), Toast.LENGTH_SHORT).show();
             updatePendingReminders();
             updateCompletedReminders();
         } else {
-            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.reminder_failed), Toast.LENGTH_SHORT).show();
         }
     }
 }

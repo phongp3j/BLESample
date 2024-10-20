@@ -1,81 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/background_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:background="@drawable/background_login"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context=".RegisterActivity">
+
     <EditText
-        android:layout_margin="5dp"
+        android:id="@+id/username"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/edittext_custom"
-        android:textColor="@color/input_text_color"
-        android:textColorHint="@color/hint_text_color"
-        android:textSize="16sp"
+        android:layout_margin="5dp"
         android:layout_marginBottom="10dp"
+        android:background="@drawable/edittext_custom"
+        android:hint="@string/username"
         android:inputType="text"
         android:padding="10dp"
-        android:hint="Username"
-        android:id="@+id/username"
-        />
-    <EditText
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edittext_custom"
         android:textColor="@color/input_text_color"
         android:textColorHint="@color/hint_text_color"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:textSize="16sp" />
+
+    <EditText
         android:id="@+id/password"
-        />
-    <EditText
-        android:layout_margin="5dp"
-        android:padding="10dp"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/edittext_custom"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:padding="10dp"
         android:textColor="@color/input_text_color"
         android:textColorHint="@color/hint_text_color"
-        android:textSize="16sp"
-        android:layout_marginBottom="10dp"
-        android:hint="Confirm Password"
-        android:inputType="textPassword"
+        android:textSize="16sp" />
+
+    <EditText
         android:id="@+id/cpassword"
-        />
-    <Button
-        android:layout_width="wrap_content"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="Đăng ký"
-        android:background="@drawable/custom_register_button"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:minHeight="5dp"
-        android:minWidth="180dp"
-        android:gravity="center"
-        android:elevation="4dp"
-        android:id="@+id/register"
-        />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_custom"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        android:minHeight="5dp"
-        android:minWidth="180dp"
-        android:gravity="center"
-        android:elevation="4dp"
         android:layout_margin="5dp"
-        android:text="Quay Lại"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edittext_custom"
+        android:hint="@string/confirm_password"
+        android:inputType="textPassword"
+        android:padding="10dp"
+        android:textColor="@color/input_text_color"
+        android:textColorHint="@color/hint_text_color"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_register_button"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:minWidth="180dp"
+        android:minHeight="5dp"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <Button
         android:id="@+id/back"
-        />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/button_custom"
+        android:elevation="4dp"
+        android:gravity="center"
+        android:minWidth="180dp"
+        android:minHeight="5dp"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
 
 </LinearLayout>

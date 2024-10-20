@@ -41,7 +41,7 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
         recyclerView = view.findViewById(R.id.recyclView);
         tvdalam = view.findViewById(R.id.dathem);
 
-        adapter = new RecycleViewAdapter();
+        adapter = new RecycleViewAdapter(getContext());
         petDao = new PetDao(getContext());
 
         LinearLayoutManager manager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -63,7 +63,7 @@ public class FragmentMyPETs extends Fragment implements RecycleViewAdapter.ItemL
         super.onResume();
         List<Pet> list = petDao.getAll(DataManager.getInstance().getUserId());
         adapter.setList(list);
-        tvdalam.setText("Số Pet đã thêm: " + list.size());
+        tvdalam.setText(getResources().getString(R.string.num_pet, list.size()));
     }
 
     @Override

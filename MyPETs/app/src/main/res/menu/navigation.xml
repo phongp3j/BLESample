@@ -3,13 +3,13 @@
     <item
         android:id="@+id/mMyPets"
         android:icon="@drawable/dog"
-        android:title="My Pets"></item>
+        android:title="@string/my_pets"></item>
     <item
         android:id="@+id/mAddPet"
         android:icon="@drawable/add"
-        android:title="Add New Pet"></item>
+        android:title="@string/add_new_pet_label"></item>
     <item
         android:id="@+id/mUserInfo"
         android:icon="@drawable/settings"
-        android:title="Info"></item>
+        android:title="@string/setting"></item>
 </menu>

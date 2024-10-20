@@ -1,5 +1,6 @@
 package com.example.mypets.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +16,14 @@ import java.util.List;
 
 public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.ViewHolder> {
 
+    private Context context;
     private List<HealthData> healthDataList;
 
-    public HealthDataAdapter(List<HealthData> healthDataList) {
+    public HealthDataAdapter(Context context, List<HealthData> healthDataList) {
+        this.context = context;
         this.healthDataList = healthDataList;
     }
+
 
     @NonNull
     @Override
@@ -31,9 +35,10 @@ public class HealthDataAdapter extends RecyclerView.Adapter<HealthDataAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         HealthData data = healthDataList.get(position);
-        holder.tvHeartRate.setText("Heart Rate: " + String.valueOf(data.getHeartRate()) + " bpm");
-        holder.tvTemperature.setText("Temperature: " + String.valueOf(data.getTemperature()) + "°C");
-        holder.tvTimestamp.setText(data.getRecordedAt());
+//        getString(R.string.formatted_string, name, age);
+        holder.tvHeartRate.setText(context.getResources().getString(R.string.heart_rate_info, data.getHeartRate()));
+        holder.tvTemperature.setText(context.getResources().getString(R.string.temperature_info, data.getTemperature()));
+        holder.tvTimestamp.setText(context.getResources().getString(R.string.timestamp, data.getRecordedAt()));
     }
 
     @Override

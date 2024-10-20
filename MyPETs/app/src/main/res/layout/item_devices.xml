@@ -7,7 +7,7 @@
     android:background="@color/white"
     app:cardCornerRadius="15dp">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -51,7 +51,7 @@
             android:layout_marginVertical="16dp"
             android:layout_marginRight="16dp"
             android:background="@drawable/button_custom"
-            android:text="Add pet"
-            android:textColor="@color/white"/>
+            android:text="@string/add_pet"
+            android:textColor="@color/white" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

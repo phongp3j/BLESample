@@ -1,5 +1,6 @@
 package com.example.mypets.Adapters;
 
+import android.content.Context;
 import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,11 +18,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.HomeViewHolder> {
+
+    private Context context;
     private List<Pet> list;
     private ItemListener itemListener;
 
-    public RecycleViewAdapter() {
+    public RecycleViewAdapter(Context context) {
         list = new ArrayList<>();
+        this.context = context;
     }
 
     public void setList(List<Pet> list) {
@@ -53,7 +57,7 @@ public class RecycleViewAdapter extends RecyclerView.Adapter<RecycleViewAdapter.
             holder.ivPetImage.setPadding(0, 0, 0, 0);
         }
         holder.tvPetName.setText(pet.getName());
-        holder.tvPetAge.setText(pet.getAge() + " years");
+        holder.tvPetAge.setText(context.getResources().getString(R.string.age_info, pet.getAge()));
     }
 
     @Override

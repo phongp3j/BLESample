@@ -31,11 +31,11 @@ public class HealthDataActivity extends AppCompatActivity {
 
         healthDataDao = new HealthDataDao(this);
 
-        if (petId!=-1){
+        if (petId != -1) {
             RecyclerView recyclerView = findViewById(R.id.rv_health_data);
             List<HealthData> healthDataList = healthDataDao.getAllByPetId(petId);
-            if (healthDataList!=null){
-                HealthDataAdapter adapter = new HealthDataAdapter(healthDataList);
+            if (healthDataList != null) {
+                HealthDataAdapter adapter = new HealthDataAdapter(this, healthDataList);
                 recyclerView.setLayoutManager(new LinearLayoutManager(this));
                 recyclerView.setAdapter(adapter);
             }

@@ -79,9 +79,6 @@
             android:name=".PetDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".ConnectActivity"
-            android:exported="false" />
-        <activity
             android:name=".RegisterActivity"
             android:exported="false" />
         <activity

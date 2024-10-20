@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">Pets Care</string>
+    <string name="logo">logo</string>
+
+    <string name="set_reminder">ĐẶT LỜI NHẮC</string>
+    <string name="select_pet">Chọn Thú Cưng</string>
+    <string name="select_your_pet">Chọn thú cưng của bạn</string>
+    <string name="type_of_reminder">Loại Lời Nhắc</string>
+    <string name="example_vaccination">ví dụ... tiêm phòng</string>
+    <string name="time">Thời Gian</string>
+    <string name="select_time">Chọn thời gian</string>
+    <string name="cancel">Hủy</string>
+    <string name="save">Lưu</string>
+
+    <string name="health_data">DỮ LIỆU SỨC KHỎE</string>
+
+    <string name="username">Tên Người Dùng</string>
+    <string name="password">Mật Khẩu</string>
+    <string name="confirm_password">Xác Nhận Mật Khẩu</string>
+    <string name="login">Đăng Nhập</string>
+    <string name="register">Đăng Ký</string>
+
+    <string name="pets_care">CHĂM SÓC THÚ CƯNG</string>
+    <string name="num_pet">Số thú cưng đã thêm: %d</string>
+
+    <string name="pet_detail">CHI TIẾT THÚ CƯNG</string>
+    <string name="health_metrics">Chỉ Số Sức Khỏe</string>
+    <string name="heart_rate">Nhịp Tim</string>
+    <string name="temperature">Nhiệt Độ</string>
+    <string name="show_history">Hiển Thị Lịch Sử</string>
+    <string name="notes">Ghi Chú</string>
+
+    <string name="reminder">LỜI NHẮC</string>
+    <string name="add_reminder">Thêm lời nhắc</string>
+    <string name="pending">Chưa Hoàn Thành</string>
+    <string name="completed">Đã Hoàn Thành</string>
+    <string name="empty">Trống</string>
+
+    <string name="add_new_pet">THÊM THÚ CƯNG MỚI</string>
+    <string name="device_address">Địa chỉ Thiết Bị</string>
+    <string name="change">Thay Đổi</string>
+    <string name="pet_name">Tên Thú Cưng</string>
+    <string name="enter_pet_name">Nhập tên thú cưng</string>
+    <string name="breed">Giống</string>
+    <string name="enter_breed">Nhập giống</string>
+    <string name="age">Tuổi</string>
+    <string name="enter_pet_age">Nhập tuổi thú cưng</string>
+    <string name="weight">Cân Nặng</string>
+    <string name="enter_pet_weight">Nhập cân nặng của thú cưng</string>
+    <string name="health_information">Thông Tin Sức Khỏe</string>
+    <string name="enter_health_information">Nhập thông tin sức khỏe</string>
+    <string name="back">Quay Lại</string>
+
+    <string name="scan">Quét</string>
+    <string name="scanning">Đang Quét...</string>
+    <string name="available_devices">Thiết Bị Có Sẵn</string>
+    <string name="saved_devices">Thiết Bị Đã Lưu</string>
+    <string name="add_pet">Thêm</string>
+    <string name="edit_pet">Chỉnh sửa</string>
+
+    <string name="breed_age_info">%s, %d năm</string>
+    <string name="age_info">%d năm</string>
+    <string name="heart_rate_info">Nhịp Tim: %d bpm</string>
+    <string name="temperature_info">Nhiệt Độ: %f °C</string>
+    <string name="timestamp">Thời Gian: %s</string>
+
+    <string name="connecting">Đang kết nối</string>
+    <string name="connected">Đã kết nối</string>
+    <string name="disconnected">Đã ngắt kết nối</string>
+
+    <string name="completed_label">Đã Hoàn Thành</string>
+    <string name="done">Xong</string>
+    <string name="snooze">Báo Lại</string>
+
+    <string name="my_pets">Thú Cưng Của Tôi</string>
+    <string name="add_new_pet_label">Thêm Thú Cưng</string>
+    <string name="setting">Cài Đặt</string>
+
+    <string name="reminder_done">Lời nhắc đã được đánh dấu là Hoàn thành!</string>
+    <string name="reminder_snooze">Lời nhắc đã được báo lại trong 30 phút!</string>
+    <string name="reminder_failed">Thất bại</string>
+ư
+    <string name="language">Ngôn Ngữ</string>
+    <string name="account_info">Thông Tin Tài Khoản</string>
+    <string name="support">Ủng Hộ</string>
+    <string name="select_language">Chọn Ngôn Ngữ</string>
+    <string name="english">Tiếng Anh</string>
+    <string name="vietnamese">Tiếng Việt</string>
+</resources>

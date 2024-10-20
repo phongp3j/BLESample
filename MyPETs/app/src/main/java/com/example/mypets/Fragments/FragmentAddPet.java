@@ -145,7 +145,7 @@ public class FragmentAddPet extends Fragment {
 
     private void showImageSelectionOptions() {
         // Hiển thị dialog để chọn giữa máy ảnh và thư viện
-        String[] options = {"Take a photo", "Select from gallery"};
+        String[] options = {"Chụp ảnh", "Lựa chọn ở thư viện"};
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle("Choose an option");
         builder.setItems(options, (dialog, which) -> {

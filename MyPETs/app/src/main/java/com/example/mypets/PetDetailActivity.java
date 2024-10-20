@@ -130,12 +130,12 @@ public class PetDetailActivity extends AppCompatActivity {
         petDao = new PetDao(this);
         healthDataDao = new HealthDataDao(this);
 
-        currHealthData = new HealthData();
-        currHealthData.setPetId(pet.getId());
-
         Intent intent = getIntent();
         pet = (Pet) intent.getSerializableExtra(KEY_PET_DETAILS_DISPLAY);
         deviceAddress = pet.getDeviceAddress();
+
+        currHealthData = new HealthData();
+        currHealthData.setPetId(pet.getId());
 
         initView();
 
@@ -192,7 +192,7 @@ public class PetDetailActivity extends AppCompatActivity {
             ivPetImage.setPadding(0, 0, 0, 0);
         }
         tvPetName.setText(pet.getName());
-        tvPetInfo.setText(pet.getBreed() + ", " + pet.getAge() + " years");
+        tvPetInfo.setText(getResources().getString(R.string.breed_age_info, pet.getBreed(), pet.getAge()));
         tvPetWeight.setText(String.valueOf(pet.getWeight()) + " kg");
 
         tvNote.setText(pet.getNote());
@@ -239,7 +239,14 @@ public class PetDetailActivity extends AppCompatActivity {
     }
 
     public void updateSensorStatus(SensorState state) {
-        tvConnectionState.setText(state.name()); // Hiển thị tên trạng thái
+        String stateString = getResources().getString(R.string.connecting);
+        if (state.equals(SensorState.CONNECTED)) {
+            stateString = getResources().getString(R.string.connected);
+        } else if (state.equals(SensorState.DISCONNECTED)) {
+            stateString = getResources().getString(R.string.disconnected);
+        }
+
+        tvConnectionState.setText(stateString); // Hiển thị tên trạng thái
         tvConnectionState.setTextColor(state.getColor()); // Đổi màu theo trạng thái
     }
 
@@ -251,7 +258,7 @@ public class PetDetailActivity extends AppCompatActivity {
         } else if (BluetoothGattUtils.isTemperatureMeasurement(uuid)) {
             currHealthData.setTemperature(data);
             Log.d(TAG, "updateData: TM " + data);
-            tvTemperature.setText(data + " F");
+            tvTemperature.setText(data + " °C");
         } else if (BluetoothGattUtils.isBatteryLevel(uuid)) {
             Log.d(TAG, "updateData: BL " + data);
         }

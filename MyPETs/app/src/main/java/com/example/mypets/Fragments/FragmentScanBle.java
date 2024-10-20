@@ -193,7 +193,7 @@ public class FragmentScanBle extends Fragment {
             scanResults.clear();
             bleDeviceAdapter.notifyDataSetChanged();
 
-            btnScan.setText("SCANNING...");
+            btnScan.setText(getResources().getString(R.string.scanning));
             btnScan.setEnabled(false);
 
             Log.d(TAG, "startBleScan: __");
@@ -217,7 +217,7 @@ public class FragmentScanBle extends Fragment {
             bluetoothLeScanner = bluetoothAdapter.getBluetoothLeScanner();
 
         if (scanning) {
-            btnScan.setText("SCAN");
+            btnScan.setText(getResources().getString(R.string.scan));
             btnScan.setEnabled(true);
 
             Log.d(TAG, "stopBleScan: __");
